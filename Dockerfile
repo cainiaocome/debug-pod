@@ -18,6 +18,7 @@ RUN test -n "$TOOL_REFRESH" \
         dnsutils \
         file \
         git \
+        gosu \
         htop \
         iproute2 \
         iputils-ping \
@@ -81,6 +82,9 @@ USER root
 RUN ln -s /home/linuxbrew/.linuxbrew/bin/python3 /usr/local/bin/python \
     && ln -s /home/linuxbrew/.linuxbrew/bin/pip3 /usr/local/bin/pip
 
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
 WORKDIR /app
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["bash"]

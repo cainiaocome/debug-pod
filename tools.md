@@ -37,6 +37,7 @@ never be reused from an older run.
 | `dnsutils` | `dig`, `nslookup`, and `nsupdate` |
 | `file` | File type inspection |
 | `git` | Source control and Homebrew bootstrap dependency |
+| `gosu` | Drop from the entrypoint's root account to the invoking host UID/GID |
 | `htop` | Interactive process viewer |
 | `iproute2` | `ip`, `ss`, and traffic-control utilities |
 | `iputils-ping` | `ping` |
@@ -70,3 +71,17 @@ image provides both `python3`/`pip3` and compatibility aliases named
 Some diagnostics need extra container privileges. For example, packet capture,
 network-interface changes, and mounting NFS may require `--cap-add` flags or
 `--privileged`, depending on the Docker host's security policy.
+
+## Runtime user
+
+`debug-here` passes the invoking user's numeric UID and GID into the container.
+The entrypoint reuses an image account when that UID already exists (for
+example, host UID 1000 uses Ubuntu's `ubuntu` account). Otherwise it creates a
+temporary account with the requested IDs. Files written to the bind mount are
+therefore owned by the invoking host user.
+
+Set `DEBUG_HERE_ROOT=1` when a debugging session must run as root:
+
+```console
+DEBUG_HERE_ROOT=1 debug-here
+```

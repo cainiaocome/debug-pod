@@ -14,6 +14,11 @@ fi
 container_directory="/app/$directory_name"
 
 exec docker run --rm --interactive --tty \
+  --env "DEBUG_UID=$(id -u)" \
+  --env "DEBUG_GID=$(id -g)" \
+  --env "DEBUG_USER=$(id -un)" \
+  --env "DEBUG_GROUP=$(id -gn)" \
+  --env "DEBUG_HERE_ROOT=${DEBUG_HERE_ROOT:-0}" \
   --workdir "$container_directory" \
   --mount "type=bind,src=$host_directory,dst=$container_directory" \
   "$image" bash
