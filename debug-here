@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+image=${DEBUG_HERE_IMAGE:-ghcr.io/cainiaocome/debug-pod:main}
+host_directory=$PWD
+directory_name=${host_directory##*/}
+
+if [[ -z $directory_name ]]; then
+  echo 'debug-here: refusing to mount the filesystem root' >&2
+  exit 2
+fi
+
+container_directory="/app/$directory_name"
+
+exec docker run --rm --interactive --tty \
+  --workdir "$container_directory" \
+  --mount "type=bind,src=$host_directory,dst=$container_directory" \
+  "$image" bash
