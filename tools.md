@@ -16,12 +16,16 @@ never be reused from an older run.
 | Formula | Commands | Purpose |
 | --- | --- | --- |
 | `bat` | `bat` | Syntax-highlighted file viewer |
+| `gcc` | `gcc`, `g++`, `gfortran` | GNU C, C++, and Fortran compiler collection |
+| `go` | `go`, `gofmt` | Go compiler and development tools |
 | `ipython` | `ipython` | Enhanced interactive Python shell |
 | `jq` | `jq` | JSON query and transformation |
 | `jupyterlab` | `jupyter`, `jupyter-lab` | Interactive Python notebooks |
+| `node` | `node`, `npm`, `npx` | Node.js runtime and package tooling |
 | `ripgrep` | `rg` | Fast recursive text search |
 | `tmux` | `tmux` | Terminal multiplexer |
 | `tree` | `tree` | Directory tree display |
+| `typescript` | `tsc`, `tsserver` | TypeScript compiler and language server |
 | `wget` | `wget` | HTTP/FTP downloader |
 | `wgcf` | `wgcf` | Generate Cloudflare WARP WireGuard profiles |
 
@@ -31,7 +35,7 @@ never be reused from an older run.
 | --- | --- |
 | `apt-file` | Search package contents |
 | `bash-completion` | Interactive shell completions |
-| `build-essential` | C/C++ compiler and build basics required by Homebrew |
+| `build-essential` | Bootstrap compiler and build basics required by Homebrew |
 | `ca-certificates` | TLS trust store |
 | `curl` | Bootstrap downloader and HTTP client |
 | `dnsutils` | `dig`, `nslookup`, and `nsupdate` |

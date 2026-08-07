@@ -103,6 +103,7 @@ Homebrew formulae for portable, fast-moving command-line applications. Notable
 tools include:
 
 - `bat`, `curl`, `jq`, `ripgrep`, `wget`, and `wgcf`
+- GCC, Go, Node.js, TypeScript, and general build tools
 - Git, OpenSSH, rsync, socat, and netcat
 - `ip`, `dig`, `mtr`, `ping`, `tcpdump`, and traceroute
 - IPython, JupyterLab, Python, and build tools

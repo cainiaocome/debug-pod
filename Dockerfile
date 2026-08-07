@@ -55,6 +55,7 @@ ENV LANG=en_US.UTF-8 \
 # use prebuilt bottles on both amd64 and arm64.
 RUN useradd --create-home --shell /bin/bash linuxbrew \
     && mkdir -p /home/linuxbrew/.linuxbrew \
+    && chmod 0755 /home/linuxbrew \
     && chown -R linuxbrew:linuxbrew /home/linuxbrew
 
 USER linuxbrew
@@ -64,12 +65,16 @@ RUN NONINTERACTIVE=1 CI=1 /bin/bash -c \
     && brew update \
     && brew install \
         bat \
+        gcc \
+        go \
         ipython \
         jq \
         jupyterlab \
+        node \
         ripgrep \
         tmux \
         tree \
+        typescript \
         wget \
         wgcf \
     && brew cleanup --prune=all \
@@ -77,10 +82,16 @@ RUN NONINTERACTIVE=1 CI=1 /bin/bash -c \
 
 USER root
 
-# Preserve the conventional command names provided by the former Python base
-# image; Homebrew exposes the current interpreter as python3/pip3 on Linux.
-RUN ln -s /home/linuxbrew/.linuxbrew/bin/python3 /usr/local/bin/python \
-    && ln -s /home/linuxbrew/.linuxbrew/bin/pip3 /usr/local/bin/pip
+# Preserve conventional, unversioned command names. Homebrew exposes Python as
+# python3/pip3 and deliberately suffixes GCC and G++ with their major version.
+RUN gcc_path=$(find /home/linuxbrew/.linuxbrew/bin -maxdepth 1 -name 'gcc-[0-9]*' | sort -V | tail -n 1) \
+    && gxx_path=$(find /home/linuxbrew/.linuxbrew/bin -maxdepth 1 -name 'g++-[0-9]*' | sort -V | tail -n 1) \
+    && test -n "$gcc_path" \
+    && test -n "$gxx_path" \
+    && ln -s /home/linuxbrew/.linuxbrew/bin/python3 /usr/local/bin/python \
+    && ln -s /home/linuxbrew/.linuxbrew/bin/pip3 /usr/local/bin/pip \
+    && ln -s "$gcc_path" /usr/local/bin/gcc \
+    && ln -s "$gxx_path" /usr/local/bin/g++
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
