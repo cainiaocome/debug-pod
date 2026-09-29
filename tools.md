@@ -16,10 +16,12 @@ never be reused from an older run.
 | Formula | Commands | Purpose |
 | --- | --- | --- |
 | `bat` | `bat` | Syntax-highlighted file viewer |
+| `fx` | `fx` | Interactive JSON viewer and processor |
 | `gcc` | `gcc`, `g++`, `gfortran` | GNU C, C++, and Fortran compiler collection |
 | `go` | `go`, `gofmt` | Go compiler and development tools |
 | `ipython` | `ipython` | Enhanced interactive Python shell |
 | `jq` | `jq` | JSON query and transformation |
+| `jless` | `jless` | Interactive pager for exploring JSON |
 | `jupyterlab` | `jupyter`, `jupyter-lab` | Interactive Python notebooks |
 | `node` | `node`, `npm`, `npx` | Node.js runtime and package tooling |
 | `ripgrep` | `rg` | Fast recursive text search |

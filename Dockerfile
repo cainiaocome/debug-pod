@@ -65,10 +65,12 @@ RUN NONINTERACTIVE=1 CI=1 /bin/bash -c \
     && brew update \
     && brew install \
         bat \
+        fx \
         gcc \
         go \
         ipython \
         jq \
+        jless \
         jupyterlab \
         node \
         ripgrep \
